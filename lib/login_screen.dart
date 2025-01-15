@@ -46,14 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 30),
                 // App Logo
                 SvgPicture.asset(
                   'assets/svg/logo_akasa.svg',
-                  height: 60.0,
+                  height: 70.0,
                   width: 40.0,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 35),
 
                 // Mobile Number Row
                 Row(
@@ -123,33 +123,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
 
                 SizedBox(
-                  width: double.infinity,
-                  height: 56, // Matches the height of the text fields
-                  child: ElevatedButton(
-                    onPressed:  _isButtonEnabled ?
-                         () {
-                            // Add your OTP logic here
-                            print("OTP sent to ${_mobileController.text}");
-                          }
-                        : null, // Disable button if input is invalid
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepOrange,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8),
-                            bottomLeft: Radius.circular(8),
-                            bottomRight: Radius.circular(8)),
-                      ),
-                    ),
-                    child: const Text(
-                      'Sign In With OTP',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+  width: double.infinity,
+  height: 56, // Matches the height of the text fields
+  child: ElevatedButton(
+    onPressed: _isButtonEnabled
+        ? () {
+            // Add your OTP logic here
+            print("OTP sent to ${_mobileController.text}");
+          }
+        : null, // Disable button if input is invalid
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.deepOrange, // Button color when enabled
+      disabledBackgroundColor: Colors.deepOrange, // Button color when disabled
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8),
+          bottomLeft: Radius.circular(8),
+          bottomRight: Radius.circular(8),
+        ),
+      ),
+    ),
+    child: const Text(
+      'Sign In With OTP',
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.white, // Text color remains white
+      ),
+    ),
+  ),
+),
+
 
                 const SizedBox(height: 10),
 
@@ -172,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
 
                 // Sign in with Password
                 GestureDetector(
@@ -194,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 40),
 
                 // Sign Up Button
                 SizedBox(

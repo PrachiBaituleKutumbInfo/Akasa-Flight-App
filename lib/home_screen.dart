@@ -2,6 +2,7 @@ import 'package:akasa_air_demo_project/book_flight_screen.dart';
 import 'package:akasa_air_demo_project/check_in_screen.dart';
 import 'package:akasa_air_demo_project/component.dart';
 import 'package:akasa_air_demo_project/flight_status_screen.dart';
+import 'package:akasa_air_demo_project/login_screen.dart';
 import 'package:akasa_air_demo_project/manage_screen.dart';
 import 'package:akasa_air_demo_project/more_screen.dart';
 import 'package:akasa_air_demo_project/profile_screen.dart';
@@ -432,6 +433,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       right: 20,
                       child: ElevatedButton(
                         onPressed: () {
+                           Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+
                           // Handle Login action here
                         },
                         style: ElevatedButton.styleFrom(
@@ -681,7 +687,7 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           selectedItemColor: Colors.deepOrange,
-          unselectedItemColor: Colors.grey,
+          unselectedItemColor: Color.fromARGB(255, 89, 88, 88),
           showUnselectedLabels: true,
           onTap: (index) {
             setState(() {
@@ -720,7 +726,7 @@ class _HomeScreenState extends State<HomeScreen> {
           items: [
             _buildNavItem(Icons.home, 'Home', 0),
             _buildNavItem(Icons.flight, 'Book', 1),
-            _buildNavItem(Icons.person, 'Me', 2),
+            _buildNavItem(Icons.account_circle_outlined, 'Me', 2),
             _buildNavItem(Icons.more_horiz, 'More', 3),
           ],
         ),
