@@ -1,3 +1,4 @@
+import 'package:akasa_air_demo_project/component.dart';
 import 'package:akasa_air_demo_project/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-      
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
@@ -123,36 +123,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
 
                 SizedBox(
-  width: double.infinity,
-  height: 56, // Matches the height of the text fields
-  child: ElevatedButton(
-    onPressed: _isButtonEnabled
-        ? () {
-            // Add your OTP logic here
-            print("OTP sent to ${_mobileController.text}");
-          }
-        : null, // Disable button if input is invalid
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.deepOrange, // Button color when enabled
-      disabledBackgroundColor: Colors.deepOrange, // Button color when disabled
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(8),
-          bottomLeft: Radius.circular(8),
-          bottomRight: Radius.circular(8),
-        ),
-      ),
-    ),
-    child: const Text(
-      'Sign In With OTP',
-      style: TextStyle(
-        fontSize: 16,
-        color: Colors.white, // Text color remains white
-      ),
-    ),
-  ),
-),
-
+                  width: double.infinity,
+                  height: 56, // Matches the height of the text fields
+                  child: ElevatedButton(
+                    onPressed: _isButtonEnabled
+                        ? () {
+                            // Add your OTP logic here
+                            print("OTP sent to ${_mobileController.text}");
+                          }
+                        : null, // Disable button if input is invalid
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Colors.deepOrange, // Button color when enabled
+                      disabledBackgroundColor:
+                          Colors.deepOrange, // Button color when disabled
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                          bottomRight: Radius.circular(8),
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'Sign In With OTP',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white, // Text color remains white
+                      ),
+                    ),
+                  ),
+                ),
 
                 const SizedBox(height: 10),
 
@@ -281,7 +282,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text(
                     'Continue as guest',
                     style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: Colors.deepPurple,
                     ),
                   ),

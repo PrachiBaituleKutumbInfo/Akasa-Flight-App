@@ -1,6 +1,26 @@
+import 'package:akasa_air_demo_project/book_flight_screen.dart';
+import 'package:akasa_air_demo_project/component.dart';
+import 'package:akasa_air_demo_project/home_screen.dart';
+import 'package:akasa_air_demo_project/profile_screen.dart';
 import 'package:flutter/material.dart';
 
-class MoreScreen extends StatelessWidget {
+class MoreScreen extends StatefulWidget {
+  const MoreScreen({super.key});
+
+  @override
+  State<MoreScreen> createState() => _MoreScreenState();
+}
+
+class _MoreScreenState extends State<MoreScreen> {
+ int _currentIndex = 3;
+
+  // Screens List
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const BookFlightScreen(),
+    const ProfileScreen(),
+    MoreScreen(),
+  ];
   final List<Map<String, String>> menuItems = [
     {"title": "Add-Ons", "route": "/addons"},
     {"title": "Privacy Policy", "route": "/privacyPolicy"},
@@ -94,46 +114,74 @@ class MoreScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3, // Highlight the "More" tab
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacementNamed(context, '/home');
-              break;
-            case 1:
-              Navigator.pushReplacementNamed(context, '/book');
-              break;
-            case 2:
-              Navigator.pushReplacementNamed(context, '/me');
-              break;
-            case 3:
-              break; // Stay on "More" screen
-          }
-        },
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: const Color.fromARGB(255, 89, 88, 88),
-        showSelectedLabels: true, // Ensure labels are visible
-        showUnselectedLabels: true, // Ensure labels are visible
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.flight),
-            label: "Book",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: "Me",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: "More",
-          ),
-        ],
+       bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.deepOrange,
+          unselectedItemColor: Color.fromARGB(255, 89, 88, 88),
+          showUnselectedLabels: true,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index; // Update the selected index
+            });
+
+            // Add navigation logic here
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BookFlightScreen()),
+                );
+                break;
+              case 2:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MoreScreen()),
+                );
+                break;
+            }
+          },
+          items: [
+            _buildNavItem(Icons.home, 'Home', 0),
+            _buildNavItem(Icons.flight, 'Book', 1),
+            _buildNavItem(Icons.account_circle_outlined, 'Me', 2),
+            _buildNavItem(Icons.more_horiz, 'More', 3),
+          ],
+        ),
+    );
+  }
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
+    final isSelected = _currentIndex == index;
+
+    return BottomNavigationBarItem(
+      icon: Container(
+        decoration: BoxDecoration(
+          color: isSelected
+              ? Colors.orange.withOpacity(0.2)
+              : Colors.transparent, // Background for selected
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Icon(
+          icon,
+          color: isSelected ? Colors.deepOrange : Colors.grey,
+        ),
       ),
+      label: label,
     );
   }
 }
@@ -143,9 +191,9 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => MoreScreen(),
-      '/home': (context) => PlaceholderScreen(title: "Home"),
-      '/book': (context) => PlaceholderScreen(title: "Book"),
-      '/me': (context) => PlaceholderScreen(title: "Me"),
+      // '/home': (context) => PlaceholderScreen(title: "Home"),
+      // '/book': (context) => PlaceholderScreen(title: "Book"),
+      // '/me': (context) => PlaceholderScreen(title: "Me"),
       '/addons': (context) => PlaceholderScreen(title: "Add-Ons"),
       '/privacyPolicy': (context) => PlaceholderScreen(title: "Privacy Policy"),
       '/terms': (context) => PlaceholderScreen(title: "Terms and Conditions"),

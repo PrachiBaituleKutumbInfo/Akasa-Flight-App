@@ -19,12 +19,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+
+  // Screens List
   final List<Widget> _screens = [
-    const Center(child: Text('Home Screen')),
-    const Center(child: Text('Book Screen')),
-    const Center(child: Text('Profile Screen')),
-    const Center(child: Text('More Screen')),
+    const HomeScreen(),
+    const BookFlightScreen(),
+    const ProfileScreen(),
+    MoreScreen(),
   ];
+
 
   final List<String> _carouselImages = [
     'assets/images/slide1.jpg',
@@ -195,9 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                               child: Row(
-                                
                                 children: [
-                                  
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: SvgPicture.asset(
@@ -243,8 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          CheckInScreen(),
+                                      builder: (context) => CheckInScreen(),
                                     ),
                                   );
                                 },
@@ -354,8 +354,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-
-                    
                   ),
                 ],
               ),
@@ -433,10 +431,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       right: 20,
                       child: ElevatedButton(
                         onPressed: () {
-                           Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
+                          );
 
                           // Handle Login action here
                         },
@@ -684,7 +683,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+        
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           selectedItemColor: Colors.deepOrange,
           unselectedItemColor: Color.fromARGB(255, 89, 88, 88),
@@ -730,6 +731,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildNavItem(Icons.more_horiz, 'More', 3),
           ],
         ),
+        
       ),
     );
   }
@@ -747,8 +749,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  BottomNavigationBarItem _buildNavItem(
-      IconData icon, String label, int index) {
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
     final isSelected = _currentIndex == index;
 
     return BottomNavigationBarItem(

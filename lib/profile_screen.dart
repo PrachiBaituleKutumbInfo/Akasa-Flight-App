@@ -1,10 +1,28 @@
+import 'package:akasa_air_demo_project/book_flight_screen.dart';
+import 'package:akasa_air_demo_project/home_screen.dart';
 import 'package:akasa_air_demo_project/login_screen.dart';
+import 'package:akasa_air_demo_project/more_screen.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  int _currentIndex = 2;
+
+  // Screens List
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const BookFlightScreen(),
+    const ProfileScreen(),
+    MoreScreen(),
+  ];
+  
+   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -111,6 +129,74 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
       ),
+       bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.deepOrange,
+          unselectedItemColor: Color.fromARGB(255, 89, 88, 88),
+          showUnselectedLabels: true,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index; // Update the selected index
+            });
+
+            // Add navigation logic here
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BookFlightScreen()),
+                );
+                break;
+              case 2:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MoreScreen()),
+                );
+                break;
+            }
+          },
+          items: [
+            _buildNavItem(Icons.home, 'Home', 0),
+            _buildNavItem(Icons.flight, 'Book', 1),
+            _buildNavItem(Icons.account_circle_outlined, 'Me', 2),
+            _buildNavItem(Icons.more_horiz, 'More', 3),
+          ],
+        ),
+    );
+  }
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
+    final isSelected = _currentIndex == index;
+
+    return BottomNavigationBarItem(
+      icon: Container(
+        decoration: BoxDecoration(
+          color: isSelected
+              ? Colors.orange.withOpacity(0.2)
+              : Colors.transparent, // Background for selected
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Icon(
+          icon,
+          color: isSelected ? Colors.deepOrange : Colors.grey,
+        ),
+      ),
+      label: label,
     );
   }
 }

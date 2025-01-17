@@ -1,3 +1,7 @@
+import 'package:akasa_air_demo_project/book_flight_screen.dart';
+import 'package:akasa_air_demo_project/home_screen.dart';
+import 'package:akasa_air_demo_project/more_screen.dart';
+import 'package:akasa_air_demo_project/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class SlideContent extends StatelessWidget {
@@ -77,6 +81,76 @@ class SlideContent extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PersistentBottomNav extends StatefulWidget {
+  const PersistentBottomNav({super.key});
+
+  @override
+  State<PersistentBottomNav> createState() => _PersistentBottomNavState();
+}
+
+class _PersistentBottomNavState extends State<PersistentBottomNav> {
+  int _currentIndex = 0;
+
+  // Screens List
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const BookFlightScreen(),
+    const ProfileScreen(),
+    MoreScreen(),
+  ];
+
+  // Bottom Navigation Bar Item Builder
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
+    final isSelected = _currentIndex == index;
+
+    return BottomNavigationBarItem(
+      icon: Container(
+        decoration: BoxDecoration(
+          color: isSelected
+              ? Colors.orange.withOpacity(0.2)
+              : Colors.transparent, // Background for selected
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Icon(
+          icon,
+          color: isSelected ? Colors.deepOrange : Colors.grey,
+        ),
+      ),
+      label: label,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screens,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.deepOrange,
+        unselectedItemColor: const Color.fromARGB(255, 89, 88, 88),
+        showUnselectedLabels: true,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          _buildNavItem(Icons.home, 'Home', 0),
+          _buildNavItem(Icons.flight, 'Book', 1),
+          _buildNavItem(Icons.account_circle_outlined, 'Me', 2),
+          _buildNavItem(Icons.more_horiz, 'More', 3),
+        ],
       ),
     );
   }
