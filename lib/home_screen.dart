@@ -167,6 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: 16,
                     child: Column(
                       children: [
+                        
                         Center(
                           child: GestureDetector(
                             onTap: () {
@@ -197,38 +198,50 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: SvgPicture.asset(
-                                      'assets/svg/book_flight.svg',
-                                      height: 50,
-                                      width: 50,
+                              child: GestureDetector(
+                                onTap: () {
+                              // Navigate to BookFlightScreen
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const BookFlightScreen(),
+                                ),
+                              );
+                            },
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: SvgPicture.asset(
+                                        'assets/svg/book_flight.svg',
+                                        height: 50,
+                                        width: 50,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Book a flight',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                    const SizedBox(width: 10),
+                                    const Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Book a flight',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        'Plan your next trip with us',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.black,
+                                        Text(
+                                          'Plan your next trip with us',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

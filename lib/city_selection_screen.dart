@@ -16,28 +16,91 @@ class CitySelectionScreen extends StatefulWidget {
 
 class _CitySelectionScreenState extends State<CitySelectionScreen> {
   final List<Map<String, String>> cities = [
-    {"code": "BOM", "name": "Mumbai", "airport": "Chhatrapati Shivaji Maharaj International Airport"},
-    {"code": "AUH", "name": "Abu Dhabi", "airport": "Zayed International Airport"},
-    {"code": "IXA", "name": "Agartala", "airport": "Maharaja Bir Bikram Airport"},
-    {"code": "AMD", "name": "Ahmedabad", "airport": "Sardar VallabhBhai Patel International Airport"},
-    {"code": "AYJ", "name": "Ayodhya", "airport": "Maharishi Valmiki International Airport, Ayodhya Dham"},
-    {"code": "IXB", "name": "Bagdogra", "airport": "Bagdogra International Airport"},
-    {"code": "BLR", "name": "Bengaluru", "airport": "Kempegowda International Airport"},
+    {
+      "code": "BOM",
+      "name": "Mumbai",
+      "airport": "Chhatrapati Shivaji Maharaj International Airport"
+    },
+    {
+      "code": "AUH",
+      "name": "Abu Dhabi",
+      "airport": "Zayed International Airport"
+    },
+    {
+      "code": "IXA",
+      "name": "Agartala",
+      "airport": "Maharaja Bir Bikram Airport"
+    },
+    {
+      "code": "AMD",
+      "name": "Ahmedabad",
+      "airport": "Sardar VallabhBhai Patel International Airport"
+    },
+    {
+      "code": "AYJ",
+      "name": "Ayodhya",
+      "airport": "Maharishi Valmiki International Airport, Ayodhya Dham"
+    },
+    {
+      "code": "IXB",
+      "name": "Bagdogra",
+      "airport": "Bagdogra International Airport"
+    },
+    {
+      "code": "BLR",
+      "name": "Bengaluru",
+      "airport": "Kempegowda International Airport"
+    },
+    {
+      "code": "BBI",
+      "name": "Bhubaneshwar",
+      "airport": "Biju Patnaik Internation Airport"
+    },
+    {
+      "code": "MMA",
+      "name": "Chennai",
+      "airport": "Chennai International Airport"
+    },
+    {
+      "code": "DEL",
+      "name": "Delhi",
+      "airport": "Indira Gandhi International Airport"
+    },
+    {"code": "DOH", "name": "Doha", "airport": "Hamad International Airport"},
+    {
+      "code": "GOX",
+      "name": "North Goa",
+      "airport": "Manohar International Airport, Goa"
+    },
+    {
+      "code": "GOP",
+      "name": "Gorakhpur",
+      "airport": "Mahayogi Gorakhnath Airport"
+    },
+    {
+      "code": "GAU",
+      "name": "Guwahati",
+      "airport": "Lokpriya Gopinath Bordoloi International Airport"
+    },
   ];
 
   String query = '';
 
   @override
   Widget build(BuildContext context) {
+    // Filter the cities based on the user's search query
     final filteredCities = cities.where((city) {
       final cityName = city["name"]!.toLowerCase();
       final airportName = city["airport"]!.toLowerCase();
-      return cityName.contains(query.toLowerCase()) || airportName.contains(query.toLowerCase());
+      final searchQuery = query.toLowerCase();
+
+      return cityName.contains(searchQuery) ||
+          airportName.contains(searchQuery);
     }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title), // Dynamic title for the screen
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -53,7 +116,7 @@ class _CitySelectionScreenState extends State<CitySelectionScreen> {
             TextField(
               onChanged: (value) {
                 setState(() {
-                  query = value;
+                  query = value; // Update query on search input
                 });
               },
               decoration: InputDecoration(
@@ -84,7 +147,7 @@ class _CitySelectionScreenState extends State<CitySelectionScreen> {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.grey[200],
+                        color: Colors.white,
                       ),
                       alignment: Alignment.center,
                       child: Text(
@@ -98,9 +161,10 @@ class _CitySelectionScreenState extends State<CitySelectionScreen> {
                     title: Text(city["name"]!),
                     subtitle: Text(city["airport"]!),
                     onTap: () {
-                      widget.onCitySelected(city["name"]!);
-                      Navigator.pop(context);
-                    },
+  widget.onCitySelected(city["name"]!); // Trigger the callback
+  Navigator.pop(context, city["name"]!); // Pass the selected city
+},
+
                   );
                 },
               ),

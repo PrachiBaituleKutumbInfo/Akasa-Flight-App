@@ -30,15 +30,15 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen>
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+             Text(
               "Bengaluru → Mumbai",
               style: TextStyle(color: Colors.black, fontSize: 16),
             ),
-            const SizedBox(height: 4),
-            const Text(
+            SizedBox(height: 4),
+             Text(
               "17 Jan 2025 • 1 Passenger",
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
@@ -68,10 +68,10 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen>
               unselectedLabelColor: Colors.grey,
               indicatorColor: Colors.deepOrange,
               tabs: const [
-                Tab(text: "Thu, 16 Jan"),
-                Tab(text: "Fri, 17 Jan"),
-                Tab(text: "Sat, 18 Jan"),
-                Tab(text: "Sun, 19 Jan"),
+                Tab(text: "Thu, 17 Jan"),
+                Tab(text: "Fri, 18 Jan"),
+                Tab(text: "Sat, 19 Jan"),
+                Tab(text: "Sun, 20 Jan"),
               ],
             ),
           ),
@@ -155,25 +155,38 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen>
       itemCount: flights.length,
       itemBuilder: (context, index) {
         final flight = flights[index];
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.flight, color: Colors.purple),
-                const SizedBox(height: 4),
-                Text(
-                  flight['flightNumber'] as String,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ],
-            ),
-            title: Text(flight['time'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Column(
+        return Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 10),
+  child: Card(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.flight, color: Colors.purple),
+              const SizedBox(height: 4),
+              Text(
+                flight['flightNumber'] as String,
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(flight['duration'] as String, style: const TextStyle(fontSize: 12)),
+                Text(
+                  flight['time'] as String,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  flight['duration'] as String,
+                  style: const TextStyle(fontSize: 12),
+                ),
                 if (flight['isLowestFare'] == true)
                   const Text(
                     "Lowest fare",
@@ -181,31 +194,49 @@ class _SearchFlightsScreenState extends State<SearchFlightsScreen>
                   ),
               ],
             ),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  flight['price'] as String,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                flight['price'] as String,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                ElevatedButton(
+              ),
+              const SizedBox(height: 4),
+              SizedBox(
+                height: 36,
+                width: 100,
+                child: ElevatedButton(
                   onPressed: () {
                     // Handle flight selection
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrange,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8),
                         bottomLeft: Radius.circular(8),
-                        bottomRight: Radius.circular(8)),
+                        bottomRight: Radius.circular(8),
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Select",
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ),
-                  child: const Text("Select", style: TextStyle(fontSize: 14, color: Colors.white)),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
+        ],
+      ),
+    ),
+  ),
+);
+
       },
     );
   }

@@ -155,7 +155,7 @@ class _MoreScreenState extends State<MoreScreen> {
             }
           },
           items: [
-            _buildNavItem(Icons.home, 'Home', 0),
+            _buildNavItem(Icons.home_outlined, 'Home', 0),
             _buildNavItem(Icons.flight, 'Book', 1),
             _buildNavItem(Icons.account_circle_outlined, 'Me', 2),
             _buildNavItem(Icons.more_horiz, 'More', 3),
@@ -167,6 +167,7 @@ class _MoreScreenState extends State<MoreScreen> {
     final isSelected = _currentIndex == index;
 
     return BottomNavigationBarItem(
+       backgroundColor: Colors.white,
       icon: Container(
         decoration: BoxDecoration(
           color: isSelected

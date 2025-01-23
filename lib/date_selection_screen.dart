@@ -49,17 +49,27 @@ class _DepartureDateScreenState extends State<DepartureDateScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-              ),
-              onPressed: () {
-                Navigator.pop(context, selectedDate);
-              },
-              child: const Text(
-                "Done",
-                style: TextStyle(fontSize: 16),
+            padding: const EdgeInsets.all(15.0),
+            child: SizedBox(width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(15),
+                  shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8),
+                          ),
+                        ),
+                  backgroundColor: Colors.deepOrange,
+                ),
+                onPressed: () {
+                  Navigator.pop(context, selectedDate);
+                },
+                child: const Text(
+                  "Done",
+                  style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ),
@@ -133,7 +143,7 @@ class _DepartureDateScreenState extends State<DepartureDateScreen> {
                   color: day != null &&
                           day.day == selectedDate.day &&
                           day.month == selectedDate.month
-                      ? Colors.orange
+                      ? Colors.deepOrange
                       : null,
                   border: Border.all(color: Colors.grey[300]!),
                   borderRadius: BorderRadius.circular(4),
@@ -227,21 +237,31 @@ class _ReturnDateScreenState extends State<ReturnDateScreen> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-              ),
-              onPressed: () {
-                Navigator.pop(context, selectedDate);
-              },
-              child: const Text(
-                "Done",
-                style: TextStyle(fontSize: 16),
-              ),
+           Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SizedBox(width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(15),
+                  shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8),
+                          ),
+                        ),
+                  backgroundColor: Colors.deepOrange,
+                ),
+                onPressed: () {
+                  Navigator.pop(context, selectedDate);
+                },
+                child: const Text(
+                  "Done",
+                  style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                ),
             ),
           ),
+           ),
         ],
       ),
     );
@@ -312,7 +332,7 @@ class _ReturnDateScreenState extends State<ReturnDateScreen> {
                   color: day != null &&
                           day.day == selectedDate.day &&
                           day.month == selectedDate.month
-                      ? Colors.orange
+                      ? Colors.deepOrange
                       : null,
                   border: Border.all(color: Colors.grey[300]!),
                   borderRadius: BorderRadius.circular(4),
